@@ -7,18 +7,27 @@ const PasteView = ({ pasteId }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchPaste() {
       try {
         const res = await axios.get(
-          `http://localhost:3700/api/pastes/${pasteId}`
+          `https://pastebin-lite-dw5r.onrender.com/api/pastes/${pasteId}`,
+          { signal: controller.signal }
         );
 
         setPaste(res.data);
       } catch (err) {
+        if (axios.isCancel(err)) return;
         setError(err.response?.data?.err || "Paste unavailable");
       }
     }
+
     fetchPaste();
+
+    return () => {
+      controller.abort();
+    };
   }, [pasteId]);
 
   if (error)
