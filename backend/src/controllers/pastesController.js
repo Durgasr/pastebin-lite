@@ -68,7 +68,7 @@ export const getPaste = async (req, res) => {
 
     const viewsUpdate = await incrementViews(id);
 
-    if (viewsUpdate.views > viewsUpdate.maxViews) {
+    if (viewsUpdate.maxViews !== null && viewsUpdate.views > viewsUpdate.maxViews) {
       return res.status(404).json({ err: "View limit exceeded" });
     }
 
@@ -86,4 +86,57 @@ export const getPaste = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+function escapeHtml(text) {
+  return str 
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+export const viewPasteHtml = async (req, res) => {
+  console.log("Hello")
+  try {
+    const { id } = req.params;
+    const paste = await findPasteById(id);
+
+    if (!paste) {
+      return res.status(404).send("<h1>Paste not found</h1>");
+    }
+
+    const now = nowMs(req);
+
+    if (paste.expiresAt && paste.expiresAt < now) {
+      return res.status(404).send("<h1>Paste expired</h1>");
+    }
+
+    if (paste.maxViews !== null && paste.views >= paste.maxViews) {
+      return res.status(404).send("<h1>View limit exceeded</h1>");
+    }
+
+    res.status(200).set("Content-Type", "text/html").send(`
+      <html>
+        <head>
+        <meta charset="UTF-8">
+          <title>Paste</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 20px;
+    }
+              pre {
+             background-color: #f7f7f7;
+             padding: 15px;
+             white-space: pre-wrap;}
+             </style>
+        </head>
+        <body>
+          <pre>${escapeHtml(paste.content)}</pre>
+        </body>
+      </html>
+    `);
+  } catch (err) {}
 };
