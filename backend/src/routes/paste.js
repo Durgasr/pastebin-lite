@@ -1,5 +1,5 @@
 import express from "express";
-import { createPaste, getPaste } from "../controllers/pastesController.js";
+import { createPaste, getPaste } from "../controllers/pasteController.js";
 
 const router = express.Router();
 
