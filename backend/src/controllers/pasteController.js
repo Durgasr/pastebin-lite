@@ -32,7 +32,7 @@ export const createPaste = async (req, res) => {
     }
 
     const createdAt = nowMs(req);
-    console.log("Created at:", createdAt);
+    
     const expiresAt = ttl_seconds ? createdAt + ttl_seconds * 1000 : null;
 
     const paste = await addNewPaste({
@@ -71,8 +71,6 @@ export const getPaste = async (req, res) => {
     if (viewsUpdate.maxViews !== null && viewsUpdate.views > viewsUpdate.maxViews) {
       return res.status(404).json({ err: "View limit exceeded" });
     }
-
-    console.log(viewsUpdate);
 
     res.status(200).json({
       content: viewsUpdate.content,
