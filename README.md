@@ -1,7 +1,7 @@
 ## Pastebin-Lite
 
 A lightweight pastebin like project built with **MERN stack**.
-Users can create pastes with optional **time-to-live(TTL)** and **maximum view limits, and share a link to view the paste
+Users can create pastes with optional **time-to-live(TTL)** and **maximum view limits**, and share a link to view the paste
 
 ---
 
