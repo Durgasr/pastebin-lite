@@ -1,7 +1,7 @@
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
 
-const port = 3000;
+const port = 3700;
 
 app.listen(port, async (err) => {
   if (err) {
