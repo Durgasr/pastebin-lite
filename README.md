@@ -36,15 +36,15 @@ Users can create pastes with optional **time-to-live(TTL)** and **maximum view l
 
 ---
 
-## Project Setup
+# Project Setup
 
-# Clone the repo
+## Clone the repo
 1.  git clone https://github.com/Durgasr/pastebin-lite.git
 2.  cd pastebin-lite
 
 ----
 
-# Backend
+## Backend
 1. cd backend
 2. npm install
 
@@ -54,7 +54,7 @@ Users can create pastes with optional **time-to-live(TTL)** and **maximum view l
 2. MONGO_URI= mongo_string
 
 
-# Run backend
+## Run backend
 
 1. node server.js
 
@@ -62,7 +62,7 @@ Users can create pastes with optional **time-to-live(TTL)** and **maximum view l
 ----
 
 
-# Frontend
+## Frontend
 
 - run below commands
 
