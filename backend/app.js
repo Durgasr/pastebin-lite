@@ -10,7 +10,7 @@ dotenv.config({ path: configPath });
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: process.env.BASE_URL, credentials: true }));
 app.use(express.json());
 
 app.use("/api/healthz", healthzRoutes);
